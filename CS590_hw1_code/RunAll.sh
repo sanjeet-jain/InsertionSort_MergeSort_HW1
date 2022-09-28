@@ -1,0 +1,1 @@
+bash default-sorted-test.sh  && bash optimised-sorted-test.sh  && bash default-random-test.sh      && bash optimised-inverted-test.sh    && bash default-inverted-test.sh  && bash optimised-random-test.sh 

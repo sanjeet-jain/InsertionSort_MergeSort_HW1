@@ -1,8 +1,8 @@
 # InsertionSort_MergeSort_HW1
  InsertionSort_MergeSort_HW1
 
-start new CMD in root folder
-then run RunAll.bat or run each command separately
+start new bash cmd in root folder
+then run RunAll.sh or run each command separately
 bash default-random-test.sh     
 bash optimised-inverted-test.sh   
 bash optimised-sorted-test.sh 
