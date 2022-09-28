@@ -2,6 +2,8 @@ echo "Starting Testing Script"
 echo "using makefil to build project"
 make
 echo
+mkdir -p output-default
+echo
 echo "test 10000, 10 Default"
 ./hw1 10000 10 0 0 >> output-default/default_insertion_sort_10000_10.txt
 echo "Done"
