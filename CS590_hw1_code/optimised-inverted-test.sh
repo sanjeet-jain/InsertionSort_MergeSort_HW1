@@ -8,9 +8,12 @@ do
 mkdir -p output-optimised-inverted-$i
 for j in 10000 25000 50000 100000 250000 500000 1000000 2500000
 do
+for k in {1..10}
+do 
 echo "test $j, $i optimised-inverted"
 timeout 6m ./hw1 $j $i -1 -1 >> output-optimised-inverted-$i/optimised-inverted_insertion_sort-$j-$i.txt
 echo "Done"
+done
 done
 done
 

@@ -2,14 +2,17 @@ echo "Starting Testing Script"
 echo "using makefile to build project"
 make
 echo
-for i in 10 25 50 
+for i in 10
 do
 mkdir -p output-default-sorted-$i
-for j in 10000 25000 50000 100000 250000 500000 1000000 2500000
+for j in 10000
 do
+for k in {1..10}
+do 
 echo "test $j, $i default-sorted"
 timeout 6m ./hw1 $j $i 0 1 >> output-default-sorted-$i/default-sorted_insertion_sort-$j-$i.txt
 echo "Done"
+done
 done
 done
 echo

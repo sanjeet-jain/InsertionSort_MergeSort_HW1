@@ -7,9 +7,12 @@ do
 mkdir -p output-optimised-sorted-$i
 for j in 10000 25000 50000 100000 250000 500000 1000000 2500000
 do
+for k in {1..10}
+do 
 echo "test $j, $i optimised-sorted"
 timeout 6m ./hw1 $j $i -1 1 >> output-optimised-sorted-$i/optimised-sorted_insertion_sort-$j-$i.txt
 echo "Done"
+done
 done
 done
 echo
