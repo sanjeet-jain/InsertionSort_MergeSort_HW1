@@ -1,5 +1,5 @@
 echo "Starting Testing Script"
-echo "using makefil to build project"
+echo "using makefile to build project"
 make
 echo
 mkdir -p output-default-sorted
