@@ -1,21 +1,26 @@
-echo "Starting Testing Script"
+echo "Starting Testing Script output-default-random"
 echo "using makefile to build project"
 make 
 echo
 
+echo "creating scripts"
+
 for i in 10 25 50 
 do
 mkdir -p output-default-random-$i
-for j in 10000 25000 50000 100000 250000 500000 # 1000000 2500000
+echo 'cd ..' >> output-default-random-$i/script-default-random-$i.sh
+for j in 10000 25000 50000 100000 # 250000 500000 1000000 2500000
 do
 for k in {1..10}
 do 
-echo "test $j, $i default-random"
-timeout 6m ./hw1 $j $i 0 0 >> output-default-random-$i/default-random_insertion_sort-$j-$i.txt
+echo 'timeout 6m ./hw1 $j $i 0 0 >> output-default-random-$i/default-random_insertion_sort-'$j'-'$i'.txt' >> output-default-random-$i/script-default-random-$i.sh
+done
+done
+done
 echo "Done"
-done
-done
-done
+
+
+
 
 
 # mkdir -p output-default-random

@@ -2,7 +2,7 @@ echo "Starting Testing Script"
 echo "using makefile to build project"
 make
 echo
-for i in 10
+for i in 10 25 50
 do
 mkdir -p output-default-sorted-$i
 for j in 10000 25000 50000 100000 250000 500000 1000000 2500000

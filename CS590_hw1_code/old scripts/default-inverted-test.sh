@@ -6,7 +6,7 @@ echo
 for i in 10 25 50 
 do
 mkdir -p output-default-inverted-$i
-for j in 10000 25000 50000 100000 250000 500000 # 1000000 2500000
+for j in 10000 25000 50000 100000 # 250000 # 500000 1000000 2500000
 do
 for k in {1..10}
 do 
