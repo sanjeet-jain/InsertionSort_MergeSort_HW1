@@ -76,7 +76,7 @@ void insertion_sort_im(int **A, int n, int l, int r)
     i = j - 1;
     location = binarySearch(preComputed, keyPrecomputed, 0, i);
     // while ((i >= l) && (preComputed[i]> keyPrecomputed))
-    while (i>=location && (preComputed[i]> keyPrecomputed))
+    while (i>=location)
     {
       A[i + 1] = A[i];
       preComputed[i + 1] = preComputed[i];

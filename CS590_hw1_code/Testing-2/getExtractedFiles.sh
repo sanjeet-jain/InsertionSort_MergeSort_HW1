@@ -1,9 +1,10 @@
 for d in */ ; do
     echo "$d"
-cd d
+    cd "$d"
+    mkdir -p extracted
 for f in ./*txt
 do
-grep -E -o "[0-9]+ms real" $f |  grep -oe '\([0-9.]*\)' >> extracted/$f
+grep -E -o "\(sort\): [0-9]+ms real" $f |  grep -oe '\([0-9.]*\)' >> extracted/$f
 echo "$f"
 done
 
