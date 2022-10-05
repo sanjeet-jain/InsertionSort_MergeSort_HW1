@@ -65,9 +65,10 @@ void insertion_sort_im(int **A, int n, int l, int r)
 {
   int i, keyPrecomputed, location;
   int *key;
-  int *preComputed = new int[r+1];
-  for(int i = 0; i<=r; i++){
-    preComputed[i]=ivector_length(A[i],n);
+  int *preComputed = new int[r + 1];
+  for (int i = 0; i <= r; i++)
+  {
+    preComputed[i] = ivector_length(A[i], n);
   }
   for (int j = l + 1; j <= r; j++)
   {
@@ -76,7 +77,7 @@ void insertion_sort_im(int **A, int n, int l, int r)
     i = j - 1;
     location = binarySearch(preComputed, keyPrecomputed, 0, i);
     // while ((i >= l) && (preComputed[i]> keyPrecomputed))
-    while (i>=location)
+    while (i >= location)
     {
       A[i + 1] = A[i];
       preComputed[i + 1] = preComputed[i];
@@ -84,7 +85,92 @@ void insertion_sort_im(int **A, int n, int l, int r)
     }
 
     A[i + 1] = key;
-    preComputed[i+1]= keyPrecomputed;
+    preComputed[i + 1] = keyPrecomputed;
+  }
+}
+void merge_array(int **A, int *preComputed, int p, int m, int r)
+{
+  // get length of each sub array
+  auto leftArrayLength = m - p + 1;
+  auto rightArrayLength = r - m;
+
+  auto *leftComputeArray = new int[leftArrayLength];
+  auto *rightComputeArray = new int[rightArrayLength];
+
+  auto **leftMainArray = new int *[leftArrayLength];
+  auto **rightMainArray = new int *[rightArrayLength];
+
+  // assign values into the sub arrays
+  auto leftArrIndex = 0;
+  auto rightArrIndex = 0;
+  auto preCompIndex = 0;
+  for (leftArrIndex = 0; leftArrIndex < leftArrayLength; leftArrIndex++)
+  {
+    leftComputeArray[leftArrIndex] = preComputed[p + leftArrIndex];
+    leftMainArray[leftArrIndex] = A[p + leftArrIndex];
+  }
+
+  for (int rightArrIndex = 0; rightArrIndex < rightArrayLength; rightArrIndex++)
+  {
+    rightComputeArray[rightArrIndex] = preComputed[m + 1 + rightArrIndex];
+    rightMainArray[rightArrIndex] = A[m + 1 + rightArrIndex];
+    // cout << "precomputed " << preComputed[m + 1 + rightArrIndex] << endl;
+    // cout << rightArray[rightArrIndex] << endl;
+  }
+  leftArrIndex = 0;
+  rightArrIndex = 0;
+  preCompIndex = p;
+
+  // check till end of each subarray for larger elements  and place them correctly in the precompute array
+  // while placing also change indices in main array
+
+  while (leftArrIndex < leftArrayLength && rightArrIndex < rightArrayLength)
+  {
+    // compare for the largest item and place them in pre comp and also shuffle the main array
+    if (leftComputeArray[leftArrIndex] <= rightComputeArray[rightArrIndex])
+    {
+      preComputed[preCompIndex] = leftComputeArray[leftArrIndex];
+      A[preCompIndex] = leftMainArray[leftArrIndex];
+      leftArrIndex++;
+    }
+    else
+    {
+      preComputed[preCompIndex] = rightComputeArray[rightArrIndex];
+      A[preCompIndex] = rightMainArray[rightArrIndex];
+      rightArrIndex++;
+    }
+    preCompIndex++;
+  }
+
+  while (leftArrIndex < leftArrayLength)
+  {
+    preComputed[preCompIndex] = leftComputeArray[leftArrIndex];
+    A[preCompIndex] = leftMainArray[leftArrIndex];
+    leftArrIndex++;
+    preCompIndex++;
+  }
+
+  while (rightArrIndex < rightArrayLength)
+  {
+    preComputed[preCompIndex] = rightComputeArray[rightArrIndex];
+    A[preCompIndex] = rightMainArray[rightArrIndex];
+    rightArrIndex++;
+    preCompIndex++;
+  }
+}
+
+void do_merge_sort(int **A, int *preComputed, int p, int r)
+{
+  if (p < r)
+  {
+    // m is the point where the array is divided into two subarrays
+    auto m = p + (r - r) / 2;
+
+    do_merge_sort(A, preComputed, p, m);
+    do_merge_sort(A, preComputed, m + 1, r);
+
+    // Merge the sorted subarrays
+    merge_array(A, preComputed, p, m, r);
   }
 }
 
@@ -93,6 +179,17 @@ void insertion_sort_im(int **A, int n, int l, int r)
  */
 void merge_sort(int **A, int n, int p, int r)
 {
+  // start index is p =0
+  // last index is r = m-1 ( where m is array size)
+
+  // step 1 pre compute the array sizes
+  int *preComputed = new int[r + 1];
+  for (int i = 0; i <= r; i++)
+  {
+    preComputed[i] = ivector_length(A[i], n);
+  }
+  // use this array as basis for sorting and swapping
+  do_merge_sort(A, preComputed, p, r);
 }
 
 /*
