@@ -1,0 +1,10 @@
+Timer (generate): 746ms real	360ms user	380ms sys
+Timer (generate): 469ms real	340ms user	110ms sys
+Timer (generate): 433ms real	330ms user	100ms sys
+Timer (generate): 428ms real	310ms user	100ms sys
+Timer (generate): 559ms real	330ms user	210ms sys
+Timer (generate): 391ms real	300ms user	80ms sys
+Timer (generate): 383ms real	310ms user	70ms sys
+Timer (generate): 377ms real	320ms user	40ms sys
+Timer (generate): 372ms real	310ms user	60ms sys
+Timer (generate): 369ms real	320ms user	30ms sys

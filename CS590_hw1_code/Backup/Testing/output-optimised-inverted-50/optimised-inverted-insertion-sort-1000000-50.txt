@@ -1,0 +1,10 @@
+Timer (generate): 274ms real	180ms user	90ms sys
+Timer (generate): 216ms real	170ms user	30ms sys
+Timer (generate): 305ms real	200ms user	90ms sys
+Timer (generate): 220ms real	180ms user	40ms sys
+Timer (generate): 197ms real	140ms user	50ms sys
+Timer (generate): 198ms real	140ms user	40ms sys
+Timer (generate): 182ms real	120ms user	50ms sys
+Timer (generate): 190ms real	170ms user	20ms sys
+Timer (generate): 163ms real	110ms user	50ms sys
+Timer (generate): 249ms real	140ms user	90ms sys

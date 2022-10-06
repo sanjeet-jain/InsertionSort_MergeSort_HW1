@@ -1,0 +1,40 @@
+Timer (generate): 20ms real	20ms user	0ms sys
+Running insertion sort algorithm: 
+Timer (sort): 74780ms real	74730ms user	30ms sys
+The output is sorted!
+Timer (generate): 21ms real	10ms user	0ms sys
+Running insertion sort algorithm: 
+Timer (sort): 81870ms real	81720ms user	70ms sys
+The output is sorted!
+Timer (generate): 24ms real	20ms user	0ms sys
+Running insertion sort algorithm: 
+Timer (sort): 80281ms real	80240ms user	0ms sys
+The output is sorted!
+Timer (generate): 22ms real	20ms user	0ms sys
+Running insertion sort algorithm: 
+Timer (sort): 80533ms real	80520ms user	0ms sys
+The output is sorted!
+Timer (generate): 21ms real	20ms user	0ms sys
+Running insertion sort algorithm: 
+Timer (sort): 75052ms real	75040ms user	0ms sys
+The output is sorted!
+Timer (generate): 23ms real	20ms user	0ms sys
+Running insertion sort algorithm: 
+Timer (sort): 77044ms real	77020ms user	10ms sys
+The output is sorted!
+Timer (generate): 26ms real	20ms user	0ms sys
+Running insertion sort algorithm: 
+Timer (sort): 82964ms real	82940ms user	10ms sys
+The output is sorted!
+Timer (generate): 23ms real	20ms user	0ms sys
+Running insertion sort algorithm: 
+Timer (sort): 83487ms real	83470ms user	0ms sys
+The output is sorted!
+Timer (generate): 21ms real	20ms user	0ms sys
+Running insertion sort algorithm: 
+Timer (sort): 83885ms real	83860ms user	10ms sys
+The output is sorted!
+Timer (generate): 21ms real	10ms user	10ms sys
+Running insertion sort algorithm: 
+Timer (sort): 85902ms real	85880ms user	0ms sys
+The output is sorted!

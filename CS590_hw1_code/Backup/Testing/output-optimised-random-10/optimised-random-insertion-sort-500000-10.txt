@@ -1,0 +1,30 @@
+Timer (generate): 96ms real	70ms user	10ms sys
+Timer (sort): 262051ms real	262040ms user	10ms sys
+The output is sorted!
+Timer (generate): 92ms real	90ms user	0ms sys
+Timer (sort): 264906ms real	264890ms user	0ms sys
+The output is sorted!
+Timer (generate): 95ms real	70ms user	20ms sys
+Timer (sort): 270782ms real	270750ms user	0ms sys
+The output is sorted!
+Timer (generate): 96ms real	80ms user	0ms sys
+Timer (sort): 264821ms real	264780ms user	10ms sys
+The output is sorted!
+Timer (generate): 107ms real	80ms user	10ms sys
+Timer (sort): 271476ms real	271460ms user	10ms sys
+The output is sorted!
+Timer (generate): 93ms real	90ms user	0ms sys
+Timer (sort): 271502ms real	271480ms user	0ms sys
+The output is sorted!
+Timer (generate): 90ms real	90ms user	0ms sys
+Timer (sort): 236907ms real	236880ms user	0ms sys
+The output is sorted!
+Timer (generate): 82ms real	80ms user	0ms sys
+Timer (sort): 233649ms real	233640ms user	0ms sys
+The output is sorted!
+Timer (generate): 83ms real	80ms user	0ms sys
+Timer (sort): 232781ms real	232780ms user	0ms sys
+The output is sorted!
+Timer (generate): 87ms real	70ms user	10ms sys
+Timer (sort): 231955ms real	231960ms user	0ms sys
+The output is sorted!
