@@ -65,7 +65,7 @@ void insertion_sort_im(int **A, int n, int l, int r)
 {
   int i, keyPrecomputed, location;
   int *key;
-  int *preComputed = new int[r + 1];
+  int *preComputed = new int[r - l + 1];
   for (int i = 0; i <= r; i++)
   {
     preComputed[i] = ivector_length(A[i], n);
@@ -88,89 +88,63 @@ void insertion_sort_im(int **A, int n, int l, int r)
     preComputed[i + 1] = keyPrecomputed;
   }
 }
-void merge_array(int **A, int *preComputed, int p, int m, int r)
+void do_merge_sort(int **A, int *sortedPrecom, int **sortedArray, int *preComputed, int mid, int l, int r)
 {
-  // get length of each sub array
-  auto leftArrayLength = m - p + 1;
-  auto rightArrayLength = r - m;
+  int leftArrayIndex = l;
+  int rigthArrayIndex = mid + 1;
+  int mainArrayIndex = 0;
 
-  auto *leftComputeArray = new int[leftArrayLength];
-  auto *rightComputeArray = new int[rightArrayLength];
-
-  auto **leftMainArray = new int *[leftArrayLength];
-  auto **rightMainArray = new int *[rightArrayLength];
-
-  // assign values into the sub arrays
-  auto leftArrIndex = 0;
-  auto rightArrIndex = 0;
-  auto preCompIndex = 0;
-  for (leftArrIndex = 0; leftArrIndex < leftArrayLength; leftArrIndex++)
+  // loop till either left or right index end is reached
+  while (leftArrayIndex <= mid && rigthArrayIndex <= r)
   {
-    leftComputeArray[leftArrIndex] = preComputed[p + leftArrIndex];
-    leftMainArray[leftArrIndex] = A[p + leftArrIndex];
-  }
-
-  for (int rightArrIndex = 0; rightArrIndex < rightArrayLength; rightArrIndex++)
-  {
-    rightComputeArray[rightArrIndex] = preComputed[m + 1 + rightArrIndex];
-    rightMainArray[rightArrIndex] = A[m + 1 + rightArrIndex];
-    // cout << "precomputed " << preComputed[m + 1 + rightArrIndex] << endl;
-    // cout << rightArray[rightArrIndex] << endl;
-  }
-  leftArrIndex = 0;
-  rightArrIndex = 0;
-  preCompIndex = p;
-
-  // check till end of each subarray for larger elements  and place them correctly in the precompute array
-  // while placing also change indices in main array
-
-  while (leftArrIndex < leftArrayLength && rightArrIndex < rightArrayLength)
-  {
-    // compare for the largest item and place them in pre comp and also shuffle the main array
-    if (leftComputeArray[leftArrIndex] <= rightComputeArray[rightArrIndex])
+    if (preComputed[leftArrayIndex] <= preComputed[rigthArrayIndex])
     {
-      preComputed[preCompIndex] = leftComputeArray[leftArrIndex];
-      A[preCompIndex] = leftMainArray[leftArrIndex];
-      leftArrIndex++;
+      sortedPrecom[mainArrayIndex] = preComputed[leftArrayIndex];
+      sortedArray[mainArrayIndex] = A[leftArrayIndex];
+      leftArrayIndex++;
+      mainArrayIndex++;
     }
     else
     {
-      preComputed[preCompIndex] = rightComputeArray[rightArrIndex];
-      A[preCompIndex] = rightMainArray[rightArrIndex];
-      rightArrIndex++;
+      sortedPrecom[mainArrayIndex] = preComputed[rigthArrayIndex];
+      sortedArray[mainArrayIndex] = A[rigthArrayIndex];
+      rigthArrayIndex++;
+      mainArrayIndex++;
     }
-    preCompIndex++;
+    // if stuff is left out put it back to result
+  }
+  while (leftArrayIndex <= mid)
+  {
+    sortedPrecom[mainArrayIndex] = preComputed[leftArrayIndex];
+    sortedArray[mainArrayIndex] = A[leftArrayIndex];
+    leftArrayIndex++;
+    mainArrayIndex++;
+  }
+  while (rigthArrayIndex <= r)
+  {
+    sortedPrecom[mainArrayIndex] = preComputed[rigthArrayIndex];
+    sortedArray[mainArrayIndex] = A[rigthArrayIndex];
+    rigthArrayIndex++;
+    mainArrayIndex++;
   }
 
-  while (leftArrIndex < leftArrayLength)
+  for (int mainArrayIndex = 0, leftArrayIndex = l; leftArrayIndex <= r; leftArrayIndex++, mainArrayIndex++)
   {
-    preComputed[preCompIndex] = leftComputeArray[leftArrIndex];
-    A[preCompIndex] = leftMainArray[leftArrIndex];
-    leftArrIndex++;
-    preCompIndex++;
-  }
-
-  while (rightArrIndex < rightArrayLength)
-  {
-    preComputed[preCompIndex] = rightComputeArray[rightArrIndex];
-    A[preCompIndex] = rightMainArray[rightArrIndex];
-    rightArrIndex++;
-    preCompIndex++;
+    preComputed[leftArrayIndex] = sortedPrecom[mainArrayIndex];
+    A[leftArrayIndex] = sortedArray[mainArrayIndex];
   }
 }
-
-void do_merge_sort(int **A, int *preComputed, int p, int r)
+void do_merge(int **A, int *sortedPrecom, int **sortedArray, int *preComputed, int p, int r)
 {
   if (p < r)
   {
-    // m is the point where the array is divided into two subarrays
-    auto m = p + (r - r) / 2;
+    int mid = (p + r) / 2;
 
-    do_merge_sort(A, preComputed, p, m);
-    do_merge_sort(A, preComputed, m + 1, r);
-
-    // Merge the sorted subarrays
-    merge_array(A, preComputed, p, m, r);
+    // divide
+    do_merge(A, sortedPrecom, sortedArray, preComputed, p, mid);
+    do_merge(A, sortedPrecom, sortedArray, preComputed, mid + 1, r);
+    // conquer
+    do_merge_sort(A, sortedPrecom, sortedArray, preComputed, mid, p, r);
   }
 }
 
@@ -183,13 +157,16 @@ void merge_sort(int **A, int n, int p, int r)
   // last index is r = m-1 ( where m is array size)
 
   // step 1 pre compute the array sizes
-  int *preComputed = new int[r + 1];
+  auto *preComputed = new int[r + 1];
   for (int i = 0; i <= r; i++)
   {
     preComputed[i] = ivector_length(A[i], n);
   }
-  // use this array as basis for sorting and swapping
-  do_merge_sort(A, preComputed, p, r);
+
+  auto *sortedPrecom = new int[r + 1];
+  auto **sortedArray = new int *[r + 1];
+
+  do_merge(A, sortedPrecom, sortedArray, preComputed, p, r);
 }
 
 /*
