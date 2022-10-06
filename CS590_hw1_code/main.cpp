@@ -1,17 +1,18 @@
 #include <cstdio>
 #include <cstdlib>
+
 #include "sort.h"
 #include "timer.h"
 #include "random_generator.h"
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   random_generator rg;
   timer t;
   int n, m, d, a;
-
+  
   if (argc > 1)
-  {
+  { 
     m = atoi(argv[1]);
     m = (m < 1) ? 1 : m;
   }
@@ -48,98 +49,94 @@ int main(int argc, char *argv[])
   else
     d = 0;
 
-  int **input_array;
 
-  /*
-   * create input array sorted/reverse sorted/random
-   * depending on program argument
-   * -> input_array is allocated!
-   */
+  int** input_array;
+
+
+/*
+ * create input array sorted/reverse sorted/random 
+ * depending on program argument
+ * -> input_array is allocated!
+ */
   t.start();
   if (d == 0)
     input_array = create_random_ivector(n, m, true);
   else
   {
     if (d < 0)
-      input_array = create_reverse_sorted_ivector(n, m);
-    else
-      input_array = create_sorted_ivector(n, m);
-  }
-  t.stop();
+     input_array = create_reverse_sorted_ivector(n, m);
+   else
+     input_array = create_sorted_ivector(n, m);
+ }
+ t.stop();
 
-  cout << "Timer (generate): " << t << endl;
+ cout << "Timer (generate): " << t << endl;
 
-  /*
-   * output the first 20 elements for debugging purposes
-   */
+/*
+ * output the first 20 elements for debugging purposes
+ */
   for (int i = 0; (i < m) && (i < 20); i++)
   {
-    cout << "[ ";
-    for (int j = 0; j < n; j++)
-      cout << input_array[i][j] << " ";
-    cout << "]" << endl;
-  }
-  cout << endl;
+   cout << "[ ";
+   for (int j = 0; j < n; j++)
+    cout << input_array[i][j] << " ";
+  cout << "]" << endl;
+ }
+ cout << endl;
 
-  /*
-   * Do a merge sort or an insertion sort
-   */
-  switch (a)
-  {
-  case 0:
-  {
+/*
+ * Do a merge sort or an insertion sort
+ */
+switch (a) {
+  case 0: {
     cout << "Running insertion sort algorithm: " << endl;
     t.start();
-    insertion_sort(input_array, n, 0, m - 1);
+    insertion_sort(input_array, n, 0, m-1);
     t.stop();
-  }
-  break;
-  case 1:
-  {
+  } break;
+  case 1: {
     cout << "Running merge sort algorithm: " << endl;
     t.start();
-    merge_sort(input_array, n, 0, m - 1);
+    merge_sort(input_array, n, 0, m-1);
     t.stop();
-  }
-  break;
-  default:
-  {
+  } break;
+  default: {
     if (a < 0)
     {
-      t.start();
-      insertion_sort_im(input_array, n, 0, m - 1);
-      t.stop();
-    }
-  }
-  break;
-  }
-
-  cout << "Timer (sort): " << t << endl;
-
-  /*
-   * check whether or not the algorithm sorted the array
-   */
-  if (check_sorted(input_array, n, 0, m - 1))
-    cout << "The output is sorted!" << endl;
-  else
-    cout << "ERROR: The output is not sorted!" << endl;
-
-  /*
-   * output the first 20 elements for debugging purposes
-   */
-  for (int i = 0; (i < m) && (i < 20); i++)
-  {
-    cout << "[ ";
-    for (int j = 0; j < n; j++)
-      cout << input_array[i][j] << " ";
-    cout << "]" << endl;
-  }
-  cout << endl;
-
-  /*
-   * free the allocated storage
-   */
-  remove_ivector(input_array, m);
-
-  return 0;
+     t.start();
+     insertion_sort_im(input_array, n, 0, m-1);
+     t.stop();
+   }
+ } break;
 }
+
+cout << "Timer (sort): " << t << endl;
+
+/*
+ * check whether or not the algorithm sorted the array
+ */
+if (check_sorted(input_array, n, 0, m-1))
+  cout << "The output is sorted!" << endl;
+else
+  cout << "ERROR: The output is not sorted!" << endl;
+
+/*
+ * output the first 20 elements for debugging purposes
+ */
+ for (int i = 0; (i < m) && (i < 20); i++)
+ {
+   cout << "[ ";
+   for (int j = 0; j < n; j++)
+    cout << input_array[i][j] << " ";
+  cout << "]" << endl;
+ }
+ cout << endl;
+
+/*
+ * free the allocated storage
+ */
+remove_ivector(input_array, m);
+
+return 0;
+}
+
